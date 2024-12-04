@@ -281,6 +281,52 @@ endmodule
 //////////////////////////////////
 //The following code will infer a dual-port BRAM
 //This means the synthesis tool will recognize and use a BRAM for this code
+// module ram (
+//     addr0, 
+//     d0, 
+//     we0, 
+//     q0,  
+//     addr1,
+//     d1,
+//     we1,
+//     q1,
+//     clk);
+
+//     input [`AWIDTH-1:0] addr0;
+//     input [`MASK_WIDTH*`DWIDTH-1:0] d0;
+//     input [`MASK_WIDTH-1:0] we0;
+//     output reg [`MASK_WIDTH*`DWIDTH-1:0] q0;
+//     input [`AWIDTH-1:0] addr1;
+//     input [`MASK_WIDTH*`DWIDTH-1:0] d1;
+//     input [`MASK_WIDTH-1:0] we1;
+//     output reg [`MASK_WIDTH*`DWIDTH-1:0] q1;
+    
+//     input clk;
+
+//     reg [31:0] Ram[((1<<`AWIDTH)-1):0];
+
+//     always @(posedge clk)  
+//     begin 
+//         if (we0 == 1'b1)
+//         begin
+//             Ram[addr0] <= d0;
+//         end
+//         else q0 <= Ram[addr0];
+//     end
+        
+//     always @(posedge clk)  
+//     begin
+//         if(we1 == 1'b1)
+//         begin
+//             Ram[addr1] <= d1;
+//         end 
+//         else q1 <= Ram[addr1];
+//     end
+    
+// endmodule
+
+
+
 module ram (
     addr0, 
     d0, 
@@ -307,20 +353,20 @@ module ram (
 
     always @(posedge clk)  
     begin 
-        if (|we0 == 1'b1)
+        if (we0 == 1'b1)
         begin
-            q0 <= ram[addr0];
+            ram[addr0] <= d0;
         end
-        ram[addr0] <= d0;
+        else q0 <= ram[addr0];
     end
         
     always @(posedge clk)  
     begin
-        if(|we1 == 1'b1)
+        if(we1 == 1'b1)
         begin
-            q1 <= ram[addr1];
+            ram[addr1] <= d1;
         end
-        ram[addr1] <= d1;
+        else q1 <= ram[addr1];
     end
     
 endmodule
