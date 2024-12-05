@@ -100,7 +100,7 @@ module matmul_4x4_systolic(
     wire [7:0] cycles_for_matmul; 
     
     //FILL IN THE CODE (x)
-    assign cycles_for_matmul = 8'dx; 
+    assign cycles_for_matmul = 8'd(4*`MAT_MUL_SIZE-2); // 4N-2 (8'd14) cycles for 4x4 matmul (where N = 4) 
     assign clk_cnt_for_done = (cycles_for_matmul + `NUM_CYCLES_IN_MAC) ;  
 
 
@@ -793,25 +793,25 @@ module systolic_pe_matrix(
 	//Signals matrixCxx are the output results from each PE.
 	//Reset and clock signals of all PEs are the same.
 	//The first one is connected below. Connect the others properly.
-    processing_element pe00(.reset(effective_rst), .clk(clk), .in_a(a0),      .in_b(b0),      .out_a(a00to01), .out_b(b00to10), .out_c(matrixC00));
-    processing_element pe01(.reset(effective_rst), .clk(clk), .in_a(a00to01), .in_b(b1),      .out_a(a01to02), .out_b(b01to11), .out_c(matrixC01));
-    processing_element pe02(.reset(effective_rst), .clk(clk), .in_a(a01to02), .in_b(b2),      .out_a(a02to03), .out_b(b02to12), .out_c(matrixC02));
-    processing_element pe03(.reset(effective_rst), .clk(clk), .in_a(a02to03), .in_b(b3),      .out_a(a03to04), .out_b(b03to13), .out_c(matrixC03));
-    
-    processing_element pe10(.reset(effective_rst), .clk(clk), .in_a(a1),      .in_b(b00to10), .out_a(a10to11), .out_b(b10to20), .out_c(matrixC10));
-    processing_element pe11(.reset(effective_rst), .clk(clk), .in_a(a10to11), .in_b(b01to11), .out_a(a11to12), .out_b(b11to21), .out_c(matrixC11));
-    processing_element pe12(.reset(effective_rst), .clk(clk), .in_a(a11to12), .in_b(b02to12), .out_a(a12to13), .out_b(b12to22), .out_c(matrixC12));
-    processing_element pe13(.reset(effective_rst), .clk(clk), .in_a(a12to13), .in_b(b03to13), .out_a(a13to14), .out_b(b13to23), .out_c(matrixC13));
+processing_element pe00(.reset(effective_rst), .clk(clk), .in_a(a0),      .in_b(b0),      .out_a(a00to01), .out_b(b00to10), .out_c(matrixC00));
+processing_element pe01(.reset(effective_rst), .clk(clk), .in_a(a00to01), .in_b(b1),      .out_a(a01to02), .out_b(b01to11), .out_c(matrixC01));
+processing_element pe02(.reset(effective_rst), .clk(clk), .in_a(a01to02), .in_b(b2),      .out_a(a02to03), .out_b(b02to12), .out_c(matrixC02));
+processing_element pe03(.reset(effective_rst), .clk(clk), .in_a(a02to03), .in_b(b3),      .out_a(a03to04), .out_b(b03to13), .out_c(matrixC03));
 
-    processing_element pe20(.reset(effective_rst), .clk(clk), .in_a(a2),      .in_b(b10to20), .out_a(a20to21), .out_b(b20to30), .out_c(matrixC20));
-    processing_element pe21(.reset(effective_rst), .clk(clk), .in_a(a20to21), .in_b(b11to21), .out_a(a21to22), .out_b(b21to31), .out_c(matrixC21));
-    processing_element pe22(.reset(effective_rst), .clk(clk), .in_a(a21to22), .in_b(b12to22), .out_a(a22to23), .out_b(b22to32), .out_c(matrixC22));
-    processing_element pe23(.reset(effective_rst), .clk(clk), .in_a(a22to23), .in_b(b13to23), .out_a(a23to24), .out_b(b23to33), .out_c(matrixC23));
-    
-    processing_element pe30(.reset(effective_rst), .clk(clk), .in_a(a3),      .in_b(b20to30), .out_a(a30to31), .out_b(b30to40), .out_c(matrixC30));
-    processing_element pe31(.reset(effective_rst), .clk(clk), .in_a(a30to31), .in_b(b21to31), .out_a(a31to32), .out_b(b31to41), .out_c(matrixC31));
-    processing_element pe32(.reset(effective_rst), .clk(clk), .in_a(a31to32), .in_b(b22to32), .out_a(a32to33), .out_b(b32to42), .out_c(matrixC32));
-    processing_element pe33(.reset(effective_rst), .clk(clk), .in_a(a32to33), .in_b(b23to33), .out_a(a33to34), .out_b(b33to43), .out_c(matrixC33));
+processing_element pe10(.reset(effective_rst), .clk(clk), .in_a(a1),      .in_b(b00to10), .out_a(a10to11), .out_b(b10to20), .out_c(matrixC10));
+processing_element pe11(.reset(effective_rst), .clk(clk), .in_a(a10to11), .in_b(b01to11), .out_a(a11to12), .out_b(b11to21), .out_c(matrixC11));
+processing_element pe12(.reset(effective_rst), .clk(clk), .in_a(a11to12), .in_b(b02to12), .out_a(a12to13), .out_b(b12to22), .out_c(matrixC12));
+processing_element pe13(.reset(effective_rst), .clk(clk), .in_a(a12to13), .in_b(b03to13), .out_a(a13to14), .out_b(b13to23), .out_c(matrixC13));
+
+processing_element pe20(.reset(effective_rst), .clk(clk), .in_a(a2),      .in_b(b10to20), .out_a(a20to21), .out_b(b20to30), .out_c(matrixC20));
+processing_element pe21(.reset(effective_rst), .clk(clk), .in_a(a20to21), .in_b(b11to21), .out_a(a21to22), .out_b(b21to31), .out_c(matrixC21));
+processing_element pe22(.reset(effective_rst), .clk(clk), .in_a(a21to22), .in_b(b12to22), .out_a(a22to23), .out_b(b22to32), .out_c(matrixC22));
+processing_element pe23(.reset(effective_rst), .clk(clk), .in_a(a22to23), .in_b(b13to23), .out_a(a23to24), .out_b(b23to33), .out_c(matrixC23));
+
+processing_element pe30(.reset(effective_rst), .clk(clk), .in_a(a3),      .in_b(b20to30), .out_a(a30to31), .out_b(b30to40), .out_c(matrixC30));
+processing_element pe31(.reset(effective_rst), .clk(clk), .in_a(a30to31), .in_b(b21to31), .out_a(a31to32), .out_b(b31to41), .out_c(matrixC31));
+processing_element pe32(.reset(effective_rst), .clk(clk), .in_a(a31to32), .in_b(b22to32), .out_a(a32to33), .out_b(b32to42), .out_c(matrixC32));
+processing_element pe33(.reset(effective_rst), .clk(clk), .in_a(a32to33), .in_b(b23to33), .out_a(a33to34), .out_b(b33to43), .out_c(matrixC33));
 
 
 
