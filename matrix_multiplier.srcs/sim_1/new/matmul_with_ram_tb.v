@@ -93,26 +93,27 @@ module matmul_tb;
 // 9 1 0 5   9 6 3 2   54 40 46 13    36 28 2E 0D
 //You do not need to use a for loop to initialize matrices, as shown below
 
-//initial begin
+// initial begin
 //   //FILL IN REST OF THE CODE 
 //   //A is stored in ROW MAJOR format
 //   //A[0][0] (8'h08) should be the least significant byte of ram[0]
 //   //The first column of A should be read together. So, it needs to be 
 //   //placed in the first matrix_A ram location.
 //   //This is due to Verilog conventions declaring {MSB, ..., LSB}
-//   u_matmul.matrix_A.ram[0]  = {8'hxx, 8'hxx, 8'hxx, 8'hxx}; //Update this line
-//   u_matmul.matrix_A.ram[1]  = //Complete this line
-//   u_matmul.matrix_A.ram[2]  = //Complete this line
-//   u_matmul.matrix_A.ram[3]  = //Complete this line
- 
-//  //B is stored in COL MAJOR format
+//   u_matmul.matrix_A.ram[0]  = {8'h09, 8'h05, 8'h03, 8'h08}; //Update this line
+//   u_matmul.matrix_A.ram[1]  = {8'h01, 8'h02, 8'h03, 8'h04}; //Complete this line
+//   u_matmul.matrix_A.ram[2]  = {8'h00, 8'h01, 8'h03, 8'h06}; //Complete this line
+//   u_matmul.matrix_A.ram[3]  = {8'h05, 8'h06, 8'h07, 8'h08}; //Complete this line
+  
+//    //B is stored in COL MAJOR format
 //   //B[0][0] (8'h01) should be the least significant of ram[0]
 //   //The first row of B should be read together. So, it needs to be 
 //   //placed in the first matrix_B ram location.
-//   u_matmul.matrix_B.ram[0]  = //Complete this line
-//   u_matmul.matrix_B.ram[1]  = //Complete this line
-//   u_matmul.matrix_B.ram[2]  = //Complete this line
-//   u_matmul.matrix_B.ram[3]  = //Complete this line
-//end
+//   u_matmul.matrix_B.ram[0]  = {8'h00, 8'h03, 8'h01, 8'h01}; //Complete this line
+//   u_matmul.matrix_B.ram[1]  = {8'h03, 8'h04, 8'h01, 8'h00}; //Complete this line
+//   u_matmul.matrix_B.ram[2]  = {8'h01, 8'h03, 8'h05, 8'h03}; //Complete this line
+//   u_matmul.matrix_B.ram[3]  = {8'h02, 8'h03, 8'h06, 8'h09}; //Complete this line
+
+// end
 
 endmodule
