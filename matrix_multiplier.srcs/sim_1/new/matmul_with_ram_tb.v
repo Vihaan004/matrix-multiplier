@@ -73,16 +73,16 @@ module matmul_tb;
 // 1 1 1 1   1 1 1 1   4 4 4 4    4 4 4 4
 //You can verify output through waveforms by adding scope object u_matmul.matrix_C.ram 
 
-    integer i;
+    // integer i;
     
-    initial 
-    begin
-        for (i=0; i<4; i = i + 1) 
-        begin
-            u_matmul.matrix_A.ram[i] = {8'h01, 8'h01, 8'h01, 8'h01};
-            u_matmul.matrix_B.ram[i] = {8'h01, 8'h01, 8'h01, 8'h01};
-        end
-    end
+    // initial 
+    // begin
+    //     for (i=0; i<4; i = i + 1) 
+    //     begin
+    //         u_matmul.matrix_A.ram[i] = {8'h01, 8'h01, 8'h01, 8'h01};
+    //         u_matmul.matrix_B.ram[i] = {8'h01, 8'h01, 8'h01, 8'h01};
+    //     end
+    // end
     
 
 //Actual test case
@@ -93,27 +93,27 @@ module matmul_tb;
 // 9 1 0 5   9 6 3 2   54 40 46 13    36 28 2E 0D
 //You do not need to use a for loop to initialize matrices, as shown below
 
-// initial begin
-//   //FILL IN REST OF THE CODE 
-//   //A is stored in ROW MAJOR format
-//   //A[0][0] (8'h08) should be the least significant byte of ram[0]
-//   //The first column of A should be read together. So, it needs to be 
-//   //placed in the first matrix_A ram location.
-//   //This is due to Verilog conventions declaring {MSB, ..., LSB}
-//   u_matmul.matrix_A.ram[0]  = {8'h09, 8'h05, 8'h03, 8'h08}; //Update this line
-//   u_matmul.matrix_A.ram[1]  = {8'h01, 8'h02, 8'h03, 8'h04}; //Complete this line
-//   u_matmul.matrix_A.ram[2]  = {8'h00, 8'h01, 8'h03, 8'h06}; //Complete this line
-//   u_matmul.matrix_A.ram[3]  = {8'h05, 8'h06, 8'h07, 8'h08}; //Complete this line
+initial begin
+  //FILL IN REST OF THE CODE 
+  //A is stored in ROW MAJOR format
+  //A[0][0] (8'h08) should be the least significant byte of ram[0]
+  //The first column of A should be read together. So, it needs to be 
+  //placed in the first matrix_A ram location.
+  //This is due to Verilog conventions declaring {MSB, ..., LSB}
+  u_matmul.matrix_A.ram[0]  = {8'h09, 8'h05, 8'h03, 8'h08}; //Update this line
+  u_matmul.matrix_A.ram[1]  = {8'h01, 8'h02, 8'h03, 8'h04}; //Complete this line
+  u_matmul.matrix_A.ram[2]  = {8'h00, 8'h01, 8'h03, 8'h06}; //Complete this line
+  u_matmul.matrix_A.ram[3]  = {8'h05, 8'h06, 8'h07, 8'h08}; //Complete this line
   
-//    //B is stored in COL MAJOR format
-//   //B[0][0] (8'h01) should be the least significant of ram[0]
-//   //The first row of B should be read together. So, it needs to be 
-//   //placed in the first matrix_B ram location.
-//   u_matmul.matrix_B.ram[0]  = {8'h00, 8'h03, 8'h01, 8'h01}; //Complete this line
-//   u_matmul.matrix_B.ram[1]  = {8'h03, 8'h04, 8'h01, 8'h00}; //Complete this line
-//   u_matmul.matrix_B.ram[2]  = {8'h01, 8'h03, 8'h05, 8'h03}; //Complete this line
-//   u_matmul.matrix_B.ram[3]  = {8'h02, 8'h03, 8'h06, 8'h09}; //Complete this line
+   //B is stored in COL MAJOR format
+  //B[0][0] (8'h01) should be the least significant of ram[0]
+  //The first row of B should be read together. So, it needs to be 
+  //placed in the first matrix_B ram location.
+  u_matmul.matrix_B.ram[0]  = {8'h00, 8'h03, 8'h01, 8'h01}; //Complete this line
+  u_matmul.matrix_B.ram[1]  = {8'h03, 8'h04, 8'h01, 8'h00}; //Complete this line
+  u_matmul.matrix_B.ram[2]  = {8'h01, 8'h03, 8'h05, 8'h03}; //Complete this line
+  u_matmul.matrix_B.ram[3]  = {8'h02, 8'h03, 8'h06, 8'h09}; //Complete this line
 
-// end
+end
 
 endmodule
